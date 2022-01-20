@@ -4,7 +4,7 @@ import { Text, Card, Button, Icon } from 'react-native-elements';
 import MyText from './MyText';
 
 const Blogpost = (props) => {
-  const { entries, handleClick } = props;
+  const { entries, handleClick, writer } = props;
   return (
     <>
       <ScrollView>
@@ -44,30 +44,13 @@ const Blogpost = (props) => {
                 {entry.subtitle}
               </MyText>
 
-              <Button
-                icon={
-                  <Icon
-                    name="code"
-                    color="#ffffff"
-                    iconStyle={{ marginRight: 10 }}
-                  />
-                }
-                buttonStyle={{
-                  borderRadius: 0,
-                  marginLeft: 0,
-                  marginTop: 20,
-                  marginRight: 0,
-                  marginBottom: 0,
-                  backgroundColor: 'rgba(181, 23, 158,0.0)',
+              <MyText
+                mystyle={{
+                  marginBottom: 10,
                 }}
-                titleStyle={{
-                  fontFamily: 'iranyekan',
-                  fontSize: 13,
-                  color: 'rgba(181, 23, 158,0.7)',
-                }}
-                title="نویسنده :"
-                onPress={handleClick}
-              />
+              >
+                نویسنده : {writer}
+              </MyText>
             </Card>
           ))}
         </View>

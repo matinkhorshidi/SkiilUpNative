@@ -15,35 +15,29 @@ import Slider from '../components/Slider';
 import Masters from './../components/Masters';
 import IconAvatars from './../components/IconAvatars';
 import MyText from './../components/MyText';
+import CourseCard from './../components/CourseCard';
+import CategorySlider from './../components/CategorySlider';
 
+import Design from '../assets/image/Illustraitors/design.svg';
+import Seo from '../assets/image/Illustraitors/seo.svg';
+import Programming from '../assets/image/Illustraitors/programming.svg';
+import Frontdeveloper from '../assets/image/Illustraitors/frontdeveloper.svg';
+import Blogpost from './../components/Blogpost';
+import Coursepost from './../components/Coursepost';
+
+const post = {
+  title: 'آموزش کار با گوگل کنسول ابتدایی',
+  master: 'دکتر مهدی',
+  videonum: '10',
+  duration: ' دو ساعت و نیم',
+  status: 'تمام شده',
+  level: 'مقدماتی',
+  price: '10000 تومان',
+  subtitle:
+    'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
+  illustration: require('../assets/image/BlogImage.jpg'),
+};
 const ENTRIES1 = [
-  {
-    title: 'برنامه نویسی پایتون',
-    subtitle: 'توضیحات تکمیلی',
-    illustration: require('../assets/image/BlogImage.jpg'),
-  },
-  {
-    title: 'آموزش کار با گوگل کنسول ابتدایی',
-    subtitle: 'توضیحات تکمیلی',
-    illustration: require('../assets/image/BlogImage2.jpg'),
-  },
-  {
-    title: 'کورس VueJS',
-    subtitle: 'توضیحات تکمیلی',
-    illustration: require('../assets/image/BlogImage3.jpg'),
-  },
-  {
-    title: 'آموزش کار با گوگل کنسول ابتدایی',
-    subtitle: 'توضیحات تکمیلی',
-    illustration: require('../assets/image/BlogImage4.jpg'),
-  },
-  {
-    title: 'برنامه نویسی پایتون',
-    subtitle: 'توضیحات تکمیلی',
-    illustration: require('../assets/image/BlogImage5.jpg'),
-  },
-];
-const ENTRIES2 = [
   {
     title: 'آموزش کار با گوگل کنسول ابتدایی',
     subtitle: 'توضیحات تکمیلی',
@@ -70,7 +64,36 @@ const ENTRIES2 = [
     illustration: require('../assets/image/BlogImage5.jpg'),
   },
 ];
-const CourseScreen = ({ navigation }) => {
+const ENTRIES2 = [
+  {
+    title: 'فرانت دولوپرز',
+    illustration: Frontdeveloper,
+    color: '#4895EF',
+  },
+  {
+    title: 'برنامه نویسی',
+    illustration: Programming,
+    color: '#FF9C1D',
+  },
+  {
+    title: 'سئو و تولید محتوی',
+    illustration: Seo,
+    color: '#8FD01D',
+  },
+  {
+    title: 'طراحی و یو آی',
+    illustration: Design,
+    color: '#DA3033',
+  },
+];
+const CourseScreen = ({ route, navigation }) => {
+  // const { name } = route.params;
+  // const { navigation, route } = props;
+  // const params = route.params;
+  // const id = navigation.getParam('name', null) || '';
+  // const { name } = route.params;
+  // console.log(route.params.name);
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: '#eaeaea', fontFamily: 'iranyekan' }}
@@ -84,47 +107,15 @@ const CourseScreen = ({ navigation }) => {
           }}
         >
           <View style={styles.subHeader}>
-            <MyText
-              size={25}
-              mystyle={{
-                marginTop: 10,
-                marginRight: 40,
-                textAlign: 'right',
-                writingDirection: 'rtl',
-              }}
-            >
-              مهارتهای جدید
-            </MyText>
-            <MyText
-              mystyle={{
-                fontSize: 25,
-                // fontWeight: 'bold',
-                marginLeft: 40,
-                marginTop: -20,
-                textAlign: 'left',
-                color: '#7209b7',
-                textShadowColor: '#000',
-                textShadowOffset: { width: -1, height: 1 },
-                textShadowRadius: 1,
-                marginBottom: 16,
-              }}
-            >
-              یادگیری آسان
-            </MyText>
+            <Coursepost post={post} />
           </View>
-          <MyText mystyle={styles.devider}>کورس های اخیر</MyText>
+          <MyText mystyle={styles.devider}>دوره های مرتبط</MyText>
           <Slider
             entries={ENTRIES1}
-            handleClick={() => navigation.navigate('Course')}
+            handleClick={() => navigation.push('Course')}
           />
-          <MyText mystyle={styles.devider}>اساتید اسکیلآپ</MyText>
-          <Masters />
-          <MyText mystyle={styles.devider}>بلاگ های اخیر</MyText>
-
-          <Slider
-            entries={ENTRIES2}
-            handleClick={() => navigation.navigate('Blog')}
-          />
+          <MyText mystyle={styles.devider}>دسته بندی</MyText>
+          <CategorySlider entries={ENTRIES2} color="rgb(177, 108, 222,0.8)" />
         </View>
         <View
           style={{

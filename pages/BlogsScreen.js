@@ -91,10 +91,14 @@ const BlogsScreen = ({ navigation }) => {
             <CategorySlider entries={ENTRIES2} color="rgb(177, 108, 222,0.8)" />
             <CourseCard
               entries={ENTRIES1}
+              btnname={'مشاهده مقاله'}
+              icon={'book'}
               handleClick={() => navigation.navigate('Blog')}
             />
             <CourseCard
               entries={ENTRIES1}
+              btnname={'مشاهده مقاله'}
+              icon={'book'}
               handleClick={() => navigation.navigate('Blog')}
             />
           </View>

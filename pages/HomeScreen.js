@@ -15,6 +15,7 @@ import Slider from '../components/Slider';
 import Masters from './../components/Masters';
 import IconAvatars from './../components/IconAvatars';
 import MyText from './../components/MyText';
+import { useState } from 'react';
 
 const ENTRIES1 = [
   {
@@ -71,6 +72,8 @@ const ENTRIES2 = [
   },
 ];
 const HomeScreen = ({ navigation }) => {
+  const [Logedin, setLogedin] = useState(false);
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: '#eaeaea', fontFamily: 'iranyekan' }}
@@ -116,6 +119,45 @@ const HomeScreen = ({ navigation }) => {
               >
                 یادگیری آسان
               </MyText>
+              {!Logedin ? (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('ProfileStack')}
+                  style={{
+                    backgroundColor: 'rgba(0, 0, 0,0.3)',
+                    borderRadius: 20,
+                    margin: 0,
+                  }}
+                >
+                  <MyText
+                    size={20}
+                    mystyle={{
+                      textAlign: 'center',
+                      padding: 10,
+                    }}
+                  >
+                    وارد شوید
+                  </MyText>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('ProfileStack')}
+                  style={{
+                    backgroundColor: 'rgba(115, 23, 189,0.3)',
+                    borderRadius: 20,
+                    margin: 0,
+                  }}
+                >
+                  <MyText
+                    size={20}
+                    mystyle={{
+                      textAlign: 'center',
+                      padding: 10,
+                    }}
+                  >
+                    خوش آمدید آقای فلان
+                  </MyText>
+                </TouchableOpacity>
+              )}
             </View>
           </ImageBackground>
           <MyText mystyle={styles.devider}>کورس های اخیر</MyText>
@@ -123,7 +165,7 @@ const HomeScreen = ({ navigation }) => {
             entries={ENTRIES1}
             handleClick={() => navigation.navigate('Course')}
           />
-          <MyText mystyle={styles.devider}>اساتید اسکیلآپ</MyText>
+          <MyText mystyle={styles.devider}>اساتید اسکیل آپ</MyText>
           <Masters />
           <ImageBackground
             source={require('../assets/image/Top-4-Universities-offering-Masters-Program-in-Data-Science.jpg')}

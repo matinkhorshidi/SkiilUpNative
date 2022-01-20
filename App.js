@@ -21,6 +21,7 @@ import BlogsScreen from './pages/BlogsScreen';
 import BlogScreen from './pages/BlogScreen';
 import CourseScreen from './pages/CourseScreen';
 import { Directions } from 'react-native-gesture-handler';
+import CoursesCatScreen from './pages/CourseCatScreen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -106,6 +107,17 @@ function CourseStack() {
         component={CourseScreen}
         options={{
           title: 'دوره',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'iranyekan',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="CourseCat"
+        component={CoursesCatScreen}
+        options={{
+          title: 'دورهای دسته بندی',
           headerTitleAlign: 'center',
           headerTitleStyle: {
             fontFamily: 'iranyekan',
@@ -232,7 +244,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Course"
+            name="CourseStack"
             component={CourseStack}
             options={{
               tabBarLabel: 'آموزش',

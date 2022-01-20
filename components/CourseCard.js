@@ -4,7 +4,7 @@ import { Text, Card, Button, Icon } from 'react-native-elements';
 import MyText from './MyText';
 
 const CourseCard = (props) => {
-  const { entries, handleClick } = props;
+  const { entries, handleClick, btnname, icon } = props;
   return (
     <>
       <ScrollView>
@@ -27,13 +27,13 @@ const CourseCard = (props) => {
               <Button
                 icon={
                   <Icon
-                    name="code"
+                    name={icon}
                     color="#ffffff"
                     iconStyle={{ marginRight: 10 }}
                   />
                 }
                 buttonStyle={{
-                  borderRadius: 0,
+                  borderRadius: 3,
                   marginLeft: 0,
                   marginTop: 20,
                   marginRight: 0,
@@ -41,7 +41,7 @@ const CourseCard = (props) => {
                   backgroundColor: 'rgb(181, 23, 158)',
                 }}
                 titleStyle={{ fontFamily: 'iranyekan', fontSize: 13 }}
-                title="مشاهده کورس"
+                title={btnname}
                 onPress={handleClick}
               />
             </Card>
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
   },
   cardbox: {
     borderRadius: 10,
+    marginBottom: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

@@ -8,8 +8,6 @@ import {
   TouchableHighlight,
   Platform,
 } from 'react-native';
-import { SvgUri } from 'react-native-svg';
-import SVGImg from '../assets/image/Illustraitors/design.svg';
 
 import MyText from './MyText';
 

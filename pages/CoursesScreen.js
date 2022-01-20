@@ -88,14 +88,27 @@ const CoursesScreen = ({ navigation }) => {
           <View style={styles.subHeader}>
             <MyText mystyle={styles.devider}>دسته بندی</MyText>
 
-            <CategorySlider entries={ENTRIES2} color="rgb(177, 108, 222,0.8)" />
+            <CategorySlider
+              entries={ENTRIES2}
+              color="rgb(177, 108, 222,0.8)"
+              handleClick={() => navigation.navigate('CourseCat')}
+            />
             <CourseCard
               entries={ENTRIES1}
+              btnname={'مشاهده دوره'}
+              icon={'code'}
               handleClick={() => navigation.navigate('Course')}
             />
             <CourseCard
               entries={ENTRIES1}
-              handleClick={() => navigation.navigate('Course')}
+              btnname={'مشاهده دوره'}
+              icon={'code'}
+              handleClick={() =>
+                navigation.navigate({
+                  screen: 'Course',
+                  params: { name: 'Jane' },
+                })
+              }
             />
           </View>
           <MyText mystyle={styles.devider}>کورس های پر بازدید</MyText>
