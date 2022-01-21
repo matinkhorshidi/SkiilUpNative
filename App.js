@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import { useState } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
@@ -22,6 +23,8 @@ import BlogScreen from './pages/BlogScreen';
 import CourseScreen from './pages/CourseScreen';
 import { Directions } from 'react-native-gesture-handler';
 import CoursesCatScreen from './pages/CourseCatScreen';
+import LoginScreen from './pages/LoginScreen';
+import SignupScreen from './pages/SignupScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -169,6 +172,8 @@ function BlogStack() {
 }
 
 function ProfileStack() {
+  const [Logedin, setLogedin] = useState(true);
+
   return (
     <Stack.Navigator
       initialRouteName="Profile"
@@ -181,18 +186,30 @@ function ProfileStack() {
       }}
     >
       <Stack.Screen
-        name="Settings"
-        component={CoursesScreen}
-        options={{ title: 'SkillUp' }}
+        name="Login"
+        component={LoginScreen}
+        options={{
+          title: 'ورود',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'iranyekan',
+          },
+        }}
       />
       <Stack.Screen
-        name="Details"
-        component={DetailsScreen}
-        options={{ title: 'Details Page' }}
+        name="Signup"
+        component={SignupScreen}
+        options={{
+          title: 'ثبت نام',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'iranyekan',
+          },
+        }}
       />
       <Stack.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={Logedin ? ProfileScreen : LoginScreen}
         options={{
           title: 'پروفایل',
           headerTitleAlign: 'center',
