@@ -1,5 +1,3 @@
-// React Native Bottom Navigation
-// https://aboutreact.com/react-native-bottom-navigation/
 import * as React from 'react';
 import {
   TouchableOpacity,
@@ -26,7 +24,7 @@ import Blogpost from './../components/Blogpost';
 import Coursepost from './../components/Coursepost';
 import ProfileCard from './../components/ProfileCard';
 
-const post = {
+const user = {
   title: 'فلان آقا',
   master: 'دکتر مهدی',
   videonum: '10',
@@ -60,7 +58,10 @@ const ProfileScreen = ({ route, navigation }) => {
           }}
         >
           <View style={styles.subHeader}>
-            <ProfileCard post={post} />
+            <ProfileCard
+              user={user}
+              onClick={(post) => navigation.navigate('Course', { post })}
+            />
           </View>
         </View>
       </ScrollView>

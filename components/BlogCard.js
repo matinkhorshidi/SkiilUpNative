@@ -8,8 +8,9 @@ import ClockIcon from '../assets/image/Icons/clock2.svg';
 import GearIcon from '../assets/image/Icons/gear.svg';
 import LayerIcon from '../assets/image/Icons/layer.svg';
 import PriceIcon from '../assets/image/Icons/PriceTag.svg';
+import CalendarIcon from '../assets/image/Icons/calendar.svg';
 
-const CourseCard = (props) => {
+const BlogCard = (props) => {
   const { entries, handleClick, btnname, icon } = props;
   return (
     <>
@@ -27,24 +28,24 @@ const CourseCard = (props) => {
                 style={{ marginBottom: 10, borderRadius: 10 }}
                 source={post.image}
               />
-              <MyText style={{ marginBottom: 10 }}>{post.subtitle}</MyText>
+              {/* <MyText mystyle={{ marginBottom: 10 }}>{post.subtitle}</MyText> */}
               <View style={styles.user}>
-                <MasterIcon
-                  width={25}
-                  height={25}
+                <CalendarIcon
+                  width={20}
+                  height={20}
                   fill={'#000'}
                   style={{ marginTop: 5, marginLeft: 5 }}
                 />
 
-                <Text style={styles.titr}>مدرس دوره: </Text>
-                <Text style={styles.name}>{post.teacher}</Text>
+                <Text style={styles.titr}>تاریخ : </Text>
+                <Text style={styles.name}>{post.publish_date}</Text>
               </View>
               <View style={styles.user}>
-                <PriceIcon
-                  width={25}
-                  height={25}
+                <ClockIcon
+                  width={20}
+                  height={20}
                   fill={'#000'}
-                  style={{ marginTop: 5, marginLeft: 5 }}
+                  style={{ marginTop: 7, marginLeft: 5 }}
                 />
                 <Text
                   style={{
@@ -54,12 +55,13 @@ const CourseCard = (props) => {
                     fontWeight: 'bold',
                   }}
                 >
-                  قیمت دوره:
+                  زمان مطالعه:
                 </Text>
                 <Text style={{ fontSize: 15, marginTop: 5 }}>
-                  {post.cost} تومان
+                  {post.read_time} دقیقه
                 </Text>
               </View>
+
               <Button
                 icon={
                   <Icon
@@ -97,8 +99,8 @@ const styles = StyleSheet.create({
   },
   user: {
     flexDirection: 'row',
-    marginBottom: 26,
-    marginTop: 26,
+    marginBottom: 10,
+    marginTop: 10,
   },
   image: {
     width: 30,
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   name: {
-    fontSize: 16,
+    fontSize: 10,
     marginTop: 5,
   },
   cardbox: {
@@ -138,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CourseCard;
+export default BlogCard;

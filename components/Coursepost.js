@@ -31,7 +31,7 @@ const Coursepost = (props) => {
             <Card.Divider />
             <Card.Image
               style={{ marginBottom: 10, borderRadius: 10 }}
-              source={post.illustration}
+              source={post.image}
             />
             <View style={styles.user}>
               <MasterIcon
@@ -42,7 +42,7 @@ const Coursepost = (props) => {
               />
 
               <Text style={styles.titr}>مدرس دوره: </Text>
-              <Text style={styles.name}>{post.master}</Text>
+              <Text style={styles.name}>{post.teacher}</Text>
             </View>
             <View style={styles.user}>
               <VideoIcon
@@ -51,8 +51,8 @@ const Coursepost = (props) => {
                 fill={'#000'}
                 style={{ marginTop: 5, marginLeft: 5 }}
               />
-              <Text style={styles.titr}>تعداد ویدیو ها: </Text>
-              <Text style={styles.name}>{post.videonum}</Text>
+              <Text style={styles.titr}>تاریخ شروع: </Text>
+              <Text style={styles.name}>{post.creation_date}</Text>
             </View>
             <View style={styles.user}>
               <ClockIcon
@@ -82,7 +82,7 @@ const Coursepost = (props) => {
                 style={{ marginTop: 5, marginLeft: 5 }}
               />
               <Text style={styles.titr}>سطح دوره: </Text>
-              <Text style={styles.name}>{post.level}</Text>
+              <Text style={styles.name}>{post.difficulty}</Text>
             </View>
             <View style={styles.user}>
               <PriceIcon
@@ -92,9 +92,11 @@ const Coursepost = (props) => {
                 style={{ marginTop: 5, marginLeft: 5 }}
               />
               <Text style={{ fontSize: 19, marginTop: 5, fontWeight: 'bold' }}>
-                قیمت دوره:{' '}
+                قیمت دوره:
               </Text>
-              <Text style={{ fontSize: 19, marginTop: 5 }}>{post.price}</Text>
+              <Text style={{ fontSize: 19, marginTop: 5 }}>
+                {post.read_time} تومان
+              </Text>
             </View>
             <Card.Divider />
             <MyText
@@ -103,7 +105,7 @@ const Coursepost = (props) => {
                 textAlign: 'justify',
               }}
             >
-              {post.subtitle}
+              {post.description}
             </MyText>
             <Button
               icon={
@@ -158,7 +160,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     marginTop: 5,
-    fontWeight: 'bold',
   },
   cardbox: {
     borderRadius: 10,

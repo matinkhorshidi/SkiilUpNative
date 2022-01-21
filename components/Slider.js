@@ -1,8 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 import {
   View,
-  Text,
   Dimensions,
   StyleSheet,
   TouchableHighlight,
@@ -13,7 +12,6 @@ import MyText from './MyText';
 const { width: screenWidth } = Dimensions.get('window');
 
 const Slider = (props) => {
-  //   const [entries, setEntries] = useState([]);
   const carouselRef = useRef(null);
   const { entries, handleClick } = props;
   const goForward = () => {
@@ -24,12 +22,12 @@ const Slider = (props) => {
     return (
       <TouchableHighlight
         underlayColor="rgb(177, 108, 222,0.8)"
-        onPress={handleClick}
+        onPress={() => handleClick(item)}
         style={styles.tchable}
       >
         <View style={styles.item}>
           <ParallaxImage
-            source={item.illustration}
+            source={item.image}
             // source={require('../assets/image/BlogImage5.jpg')}
             containerStyle={styles.imageContainer}
             style={styles.image}
@@ -49,9 +47,6 @@ const Slider = (props) => {
 
   return (
     <View style={styles.container}>
-      {/* <TouchableOpacity onPress={goForward}>
-        <Text>go to next slide</Text>
-      </TouchableOpacity> */}
       <Carousel
         ref={carouselRef}
         sliderWidth={screenWidth}

@@ -22,6 +22,7 @@ import BlogScreen from './pages/BlogScreen';
 import CourseScreen from './pages/CourseScreen';
 import { Directions } from 'react-native-gesture-handler';
 import CoursesCatScreen from './pages/CourseCatScreen';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -233,7 +234,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="news"
+            name="BlogStack"
             component={BlogStack}
             options={{
               tabBarLabel: 'بلاگ',

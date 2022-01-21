@@ -4,55 +4,61 @@ import { Text, Card, Button, Icon } from 'react-native-elements';
 import MyText from './MyText';
 
 const Blogpost = (props) => {
-  const { entries, handleClick, writer } = props;
+  const { post, handleClick, writer } = props;
   return (
     <>
       <ScrollView>
         <View style={styles.container}>
-          {entries.map((entry, index) => (
-            <Card containerStyle={styles.cardbox}>
-              <Card.Title>
-                <Text
-                  style={{
-                    fontFamily: 'iranyekan',
-                    textAlign: 'justify',
-                    fontSize: 17,
-                  }}
-                >
-                  {entry.title}
-                </Text>
-              </Card.Title>
-              <Card.Divider />
-              <Card.Image
-                style={{ marginBottom: 10, borderRadius: 10 }}
-                source={entry.illustration}
-              />
-              <MyText
-                mystyle={{
-                  marginBottom: 10,
+          <Card containerStyle={styles.cardbox}>
+            <Card.Title>
+              <Text
+                style={{
+                  fontFamily: 'iranyekan',
                   textAlign: 'justify',
+                  fontSize: 17,
                 }}
               >
-                {entry.subtitle}
-              </MyText>
-              <MyText
-                mystyle={{
-                  marginBottom: 10,
-                  textAlign: 'justify',
-                }}
-              >
-                {entry.subtitle}
-              </MyText>
-
-              <MyText
-                mystyle={{
-                  marginBottom: 10,
-                }}
-              >
-                نویسنده : {writer}
-              </MyText>
-            </Card>
-          ))}
+                {post.title}
+              </Text>
+            </Card.Title>
+            <MyText
+              mystyle={{
+                marginBottom: 5,
+                fontSize: 10,
+                textAlign: 'center',
+              }}
+            >
+              زمان مطالعه : {post.read_time}
+            </MyText>
+            <Card.Divider />
+            <Card.Image
+              style={{ marginBottom: 10, borderRadius: 10 }}
+              source={post.image}
+            />
+            <MyText
+              mystyle={{
+                marginBottom: 10,
+              }}
+            >
+              تاریخ انتشار : {post.publish_date}
+            </MyText>
+            <MyText
+              mystyle={{
+                marginBottom: 10,
+                textAlign: 'justify',
+              }}
+            >
+              {post.content}
+            </MyText>
+            <MyText
+              mystyle={{
+                marginBottom: 10,
+                textAlign: 'justify',
+              }}
+            >
+              {post.subtitle}
+            </MyText>
+          </Card>
         </View>
       </ScrollView>
     </>

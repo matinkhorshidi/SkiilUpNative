@@ -21,11 +21,11 @@ const CategorySlider = (props) => {
     carouselRef.current.snapToNext();
   };
 
-  const renderItem = ({ item, index, color }, parallaxProps) => {
+  const renderItem = ({ item }, parallaxProps) => {
     return (
       <TouchableHighlight
         underlayColor="rgb(177, 108, 222,0.8)"
-        onPress={handleClick}
+        onPress={() => handleClick(item)}
         style={styles.tchable}
       >
         <View
@@ -39,11 +39,10 @@ const CategorySlider = (props) => {
             },
           ]}
         >
-          <item.illustration width={'80%'} height={140} />
-          {/* {item.illustration} */}
+          <item.image width={'80%'} height={140} />
 
           <MyText mystyle={styles.title} numberOfLines={2}>
-            {item.title}
+            {item.name}
           </MyText>
         </View>
       </TouchableHighlight>
