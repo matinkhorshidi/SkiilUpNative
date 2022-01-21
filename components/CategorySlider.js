@@ -21,7 +21,7 @@ const CategorySlider = (props) => {
     carouselRef.current.snapToNext();
   };
 
-  const renderItem = ({ item }, parallaxProps) => {
+  const renderItem = ({ item, index, color }, parallaxProps) => {
     return (
       <TouchableHighlight
         underlayColor="rgb(177, 108, 222,0.8)"

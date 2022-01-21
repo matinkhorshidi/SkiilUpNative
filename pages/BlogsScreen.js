@@ -1,5 +1,3 @@
-// React Native Bottom Navigation
-// https://aboutreact.com/react-native-bottom-navigation/
 import * as React from 'react';
 import {
   TouchableOpacity,
@@ -17,13 +15,32 @@ import IconAvatars from './../components/IconAvatars';
 import MyText from './../components/MyText';
 import BlogCard from './../components/BlogCard';
 import CategorySlider from './../components/CategorySlider';
-
 import Design from '../assets/image/Illustraitors/design.svg';
 import Seo from '../assets/image/Illustraitors/seo.svg';
 import Programming from '../assets/image/Illustraitors/programming.svg';
 import Frontdeveloper from '../assets/image/Illustraitors/frontdeveloper.svg';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import Loader from './../components/Loader';
+const baseUrl = 'https://mzarmo.ir/';
 
 const BlogsScreen = ({ navigation }) => {
+  const [Articles, setArticles] = useState('');
+  const [Loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let url = `${baseUrl}api/article/list/`;
+    axios
+      .get(url)
+      .then((response) => {
+        setArticles(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('خطا در ارتباط با سرور');
+      });
+  }, []);
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: '#eaeaea', fontFamily: 'iranyekan' }}
@@ -39,17 +56,20 @@ const BlogsScreen = ({ navigation }) => {
           <View style={styles.subHeader}>
             {/* <MyText mystyle={styles.devider}>دسته بندی</MyText> */}
 
-            {/* <CategorySlider entries={ENTRIES2} color="rgb(177, 108, 222,0.8)" /> */}
-            <BlogCard
-              entries={ENTRIES1}
-              btnname={'مشاهده مقاله'}
-              icon={'book'}
-              handleClick={(post) => navigation.navigate('Blog', { post })}
-            />
+            {Loading ? (
+              <Loader />
+            ) : (
+              <BlogCard
+                entries={Articles}
+                btnname={'مشاهده مقاله'}
+                icon={'book'}
+                handleClick={(post) => navigation.navigate('Blog', { post })}
+              />
+            )}
           </View>
           <MyText mystyle={styles.devider}>بلاگ های پر بازدید</MyText>
           <Slider
-            entries={ENTRIES1}
+            entries={Articles}
             handleClick={(post) => navigation.navigate('Blog', { post })}
           />
         </View>

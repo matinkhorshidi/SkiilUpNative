@@ -31,7 +31,9 @@ const Coursepost = (props) => {
             <Card.Divider />
             <Card.Image
               style={{ marginBottom: 10, borderRadius: 10 }}
-              source={post.image}
+              source={{
+                uri: 'http://mzarmo.ir' + post.image,
+              }}
             />
             <View style={styles.user}>
               <MasterIcon
@@ -95,7 +97,21 @@ const Coursepost = (props) => {
                 قیمت دوره:
               </Text>
               <Text style={{ fontSize: 19, marginTop: 5 }}>
-                {post.read_time} تومان
+                {(post.cost * post.offer) / 100} تومان
+              </Text>
+            </View>
+            <View style={[styles.user]}>
+              <PriceIcon
+                width={25}
+                height={25}
+                fill={'#000'}
+                style={{ marginTop: 5, marginLeft: 5 }}
+              />
+              <Text style={{ fontSize: 19, marginTop: 5, fontWeight: 'bold' }}>
+                تخفیف دوره:
+              </Text>
+              <Text style={{ fontSize: 19, marginTop: 5 }}>
+                {100 - post.offer}%
               </Text>
             </View>
             <Card.Divider />

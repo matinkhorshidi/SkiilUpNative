@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableHighlight,
   Platform,
+  Image,
 } from 'react-native';
 import MyText from './MyText';
 
@@ -27,8 +28,9 @@ const Slider = (props) => {
       >
         <View style={styles.item}>
           <ParallaxImage
-            source={item.image}
-            // source={require('../assets/image/BlogImage5.jpg')}
+            source={{
+              uri: 'http://mzarmo.ir' + item.image,
+            }}
             containerStyle={styles.imageContainer}
             style={styles.image}
             parallaxFactor={0.4}
@@ -107,6 +109,6 @@ const styles = StyleSheet.create({
   },
   image: {
     ...StyleSheet.absoluteFillObject,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
 });

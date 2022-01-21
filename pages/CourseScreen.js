@@ -1,6 +1,7 @@
 // React Native Bottom Navigation
 // https://aboutreact.com/react-native-bottom-navigation/
 import * as React from 'react';
+
 import {
   TouchableOpacity,
   StyleSheet,
@@ -25,45 +26,10 @@ import Frontdeveloper from '../assets/image/Illustraitors/frontdeveloper.svg';
 import Blogpost from './../components/Blogpost';
 import Coursepost from './../components/Coursepost';
 
-const post = {
-  title: 'آموزش کار با گوگل کنسول ابتدایی',
-  master: 'دکتر مهدی',
-  videonum: '10',
-  duration: ' دو ساعت و نیم',
-  status: 'تمام شده',
-  level: 'مقدماتی',
-  price: '10000 تومان',
-  subtitle:
-    'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
-  image: require('../assets/image/BlogImage.jpg'),
-};
-const ENTRIES1 = [
-  {
-    title: 'آموزش کار با گوگل کنسول ابتدایی',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage.jpg'),
-  },
-  {
-    title: 'پر درآمد ترین زبان های برنامه نویسی در سال 2021',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage2.jpg'),
-  },
-  {
-    title: 'طراحی سایت با ادوب xd سال 2021',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage3.jpg'),
-  },
-  {
-    title: 'آموزش کار با گوگل کنسول ابتدایی',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage4.jpg'),
-  },
-  {
-    title: 'آموزش کار با گوگل کنسول ابتدایی',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage5.jpg'),
-  },
-];
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+const baseUrl = 'https://mzarmo.ir/';
+
 const ENTRIES2 = [
   {
     title: 'فرانت دولوپرز',
@@ -93,6 +59,22 @@ const CourseScreen = ({ route, navigation }) => {
   // const id = navigation.getParam('name', null) || '';
   // const { name } = route.params;
   // const  = route.params;
+  const [Logedin, setLogedin] = useState(false);
+  const [Courses, setCourses] = useState('');
+
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}api/course/list`)
+      .then((response) => {
+        setCourses(response.data);
+
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('خطا در ارتباط با سرور');
+      });
+  }, []);
 
   const { post } = route.params || '';
 
@@ -107,8 +89,8 @@ const CourseScreen = ({ route, navigation }) => {
           </View>
           <MyText mystyle={styles.devider}>دوره های مرتبط</MyText>
           <Slider
-            entries={ENTRIES1}
-            handleClick={() => navigation.push('Course')}
+            entries={Courses}
+            handleClick={(post) => navigation.push('Course', { post })}
           />
           <MyText mystyle={styles.devider}>دسته بندی</MyText>
           <CategorySlider entries={ENTRIES2} color="rgb(177, 108, 222,0.8)" />

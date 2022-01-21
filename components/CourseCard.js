@@ -25,7 +25,9 @@ const CourseCard = (props) => {
               <Card.Divider />
               <Card.Image
                 style={{ marginBottom: 10, borderRadius: 10 }}
-                source={post.image}
+                source={{
+                  uri: 'http://mzarmo.ir' + post.image,
+                }}
               />
               <MyText style={{ marginBottom: 10 }}>{post.subtitle}</MyText>
               <View style={styles.user}>

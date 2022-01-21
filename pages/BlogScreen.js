@@ -24,88 +24,75 @@ import Programming from '../assets/image/Illustraitors/programming.svg';
 import Frontdeveloper from '../assets/image/Illustraitors/frontdeveloper.svg';
 import Blogpost from './../components/Blogpost';
 
-const post = [
-  {
-    title: 'آموزش کار با گوگل کنسول ابتدایی',
-    subtitle:
-      'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
-    image: require('../assets/image/BlogImage.jpg'),
-  },
-];
-const ENTRIES1 = [
-  {
-    title: 'آموزش کار با گوگل کنسول ابتدایی',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage.jpg'),
-  },
-  {
-    title: 'پر درآمد ترین زبان های برنامه نویسی در سال 2021',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage2.jpg'),
-  },
-  {
-    title: 'طراحی سایت با ادوب xd سال 2021',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage3.jpg'),
-  },
-  {
-    title: 'آموزش کار با گوگل کنسول ابتدایی',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage4.jpg'),
-  },
-  {
-    title: 'آموزش کار با گوگل کنسول ابتدایی',
-    subtitle: 'توضیحات تکمیلی',
-    image: require('../assets/image/BlogImage5.jpg'),
-  },
-];
 const ENTRIES2 = [
   {
-    title: 'فرانت دولوپرز',
-    image: Frontdeveloper,
-    color: '#4895EF',
-  },
-  {
-    title: 'برنامه نویسی',
+    id: 1,
+    name: 'برنامه نویسی',
+    color: '#ff9c1d',
+    courses: 4,
     image: Programming,
-    color: '#FF9C1D',
   },
   {
-    title: 'سئو و تولید محتوی',
+    id: 2,
+    name: 'تولید محتوا و سئو',
+    color: '#8fd01d',
+    courses: 2,
     image: Seo,
-    color: '#8FD01D',
   },
   {
-    title: 'طراحی و یو آی',
+    id: 3,
+    name: 'طراحی و یوآی',
+    color: '#da3033',
+    courses: 1,
     image: Design,
-    color: '#DA3033',
+  },
+  {
+    id: 4,
+    name: 'فرانت دولوپرز',
+    color: '#4895ef',
+    courses: 1,
+    image: Frontdeveloper,
   },
 ];
+
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+const baseUrl = 'https://mzarmo.ir/';
+
 const BlogScreen = ({ route, navigation }) => {
   const { post } = route.params || '';
+  const [Articles, setArticles] = useState('');
+  const [Loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    let url = `${baseUrl}api/article/list/`;
+    axios
+      .get(url)
+      .then((response) => {
+        setArticles(response.data);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('خطا در ارتباط با سرور');
+      });
+  }, []);
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: '#eaeaea', fontFamily: 'iranyekan' }}
     >
       <ScrollView style={{ flex: 1 }}>
-        <View
-          style={{
-            flex: 1,
-            //   alignItems: 'flex-end',
-            //   justifyContent: 'center',
-          }}
-        >
+        <View style={{ flex: 1 }}>
           <View style={styles.subHeader}>
             <Blogpost post={post} />
           </View>
           <MyText mystyle={styles.devider}>مقالات مرتبط</MyText>
           <Slider
-            entries={ENTRIES1}
-            handleClick={() => navigation.navigate('Course')}
+            entries={Articles}
+            handleClick={(post) => navigation.push('Blog', { post })}
           />
           <MyText mystyle={styles.devider}>دسته بندی</MyText>
-          <CategorySlider entries={ENTRIES2} color="rgb(177, 108, 222,0.8)" />
+          {/* <CategorySlider entries={ENTRIES2} color="rgb(177, 108, 222,0.8)" /> */}
         </View>
         <View
           style={{
