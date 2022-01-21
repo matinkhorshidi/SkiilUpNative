@@ -46,7 +46,10 @@ export default function LoginScreen({ navigation }) {
         <Text style={styles.forgot_button}>فراموشی رمز</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginBtn}>
+      <TouchableOpacity
+        style={styles.loginBtn}
+        onPress={() => navigation.navigate('Profile')}
+      >
         <MyText mystyle={styles.loginText}>ورود</MyText>
       </TouchableOpacity>
       <TouchableOpacity

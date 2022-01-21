@@ -176,7 +176,7 @@ function ProfileStack() {
 
   return (
     <Stack.Navigator
-      initialRouteName="Profile"
+      initialRouteName="Login"
       screenOptions={{
         headerStyle: {
           backgroundColor: 'rgb(177, 108, 222)',
