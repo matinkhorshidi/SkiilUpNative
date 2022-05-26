@@ -15,9 +15,30 @@ import IconAvatars from './../components/IconAvatars';
 import MyText from './../components/MyText';
 import CourseCard from './../components/CourseCard';
 
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import Loader from './../components/Loader';
+const baseUrl = 'https://mzarmo.ir/';
+
 const CoursesCatScreen = ({ route, navigation }) => {
   const { item, ENTRIES1 } = route.params || '';
+  const [Logedin, setLogedin] = useState(false);
+  const [Courses, setCourses] = useState('');
+  const [Loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}api/course/list`)
+      .then((response) => {
+        setCourses(response.data);
+
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('خطا در ارتباط با سرور');
+      });
+  }, []);
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: '#eaeaea', fontFamily: 'iranyekan' }}
@@ -38,18 +59,26 @@ const CoursesCatScreen = ({ route, navigation }) => {
             >
               {item.name}
             </MyText>
-            <CourseCard
-              entries={ENTRIES1}
-              btnname={'مشاهده دوره'}
-              icon={'code'}
-              handleClick={() => navigation.navigate('Course')}
-            />
+            {Loading ? (
+              <Loader />
+            ) : (
+              <CourseCard
+                entries={Courses}
+                btnname={'مشاهده دوره'}
+                icon={'code'}
+                handleClick={(post) => navigation.navigate('Course', { post })}
+              />
+            )}
           </View>
           <MyText mystyle={styles.devider}>کورس های پر بازدید</MyText>
-          <Slider
-            entries={ENTRIES1}
-            handleClick={() => navigation.navigate('Course')}
-          />
+          {Loading ? (
+            <Loader />
+          ) : (
+            <Slider
+              entries={Courses}
+              handleClick={() => navigation.navigate('Course')}
+            />
+          )}
         </View>
         <View
           style={{

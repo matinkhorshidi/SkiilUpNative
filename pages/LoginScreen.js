@@ -27,6 +27,7 @@ export default function LoginScreen({ navigation }) {
         <TextInput
           style={styles.TextInput}
           placeholder="ایمیل"
+          error={true}
           placeholderTextColor="#003f5c"
           onChangeText={(email) => setEmail(email)}
         />
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
   TextInput: {
     height: 50,
     flex: 1,
-    // padding: 10,
+    padding: 10,
     // marginLeft: 20,
     // textAlign: 'center',
   },

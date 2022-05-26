@@ -24,7 +24,31 @@ import Seo from '../assets/image/Illustraitors/seo.svg';
 import Programming from '../assets/image/Illustraitors/programming.svg';
 import Frontdeveloper from '../assets/image/Illustraitors/frontdeveloper.svg';
 
+import Loader from '../components/Loader';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+const baseUrl = 'https://mzarmo.ir/';
+
 const CoursesScreen = ({ navigation }) => {
+  const [Courses, setCourses] = useState('');
+  const [pageNumber, setpageNumber] = useState(8);
+  const [pageSize, setpageSize] = useState(1);
+  const [Loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}api/course/list`)
+      .then((response) => {
+        setCourses(response.data);
+
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('خطا در ارتباط با سرور');
+      });
+  }, []);
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: '#eaeaea', fontFamily: 'iranyekan' }}
@@ -41,17 +65,21 @@ const CoursesScreen = ({ navigation }) => {
                 navigation.navigate('CourseCat', { ENTRIES1, item })
               }
             />
-            <CourseCard
-              entries={ENTRIES1}
-              btnname={'مشاهده دوره'}
-              icon={'code'}
-              handleClick={(post) => navigation.navigate('Course', { post })}
-            />
+            {Loading ? (
+              <Loader />
+            ) : (
+              <CourseCard
+                entries={Courses}
+                btnname={'مشاهده دوره'}
+                icon={'code'}
+                handleClick={(post) => navigation.navigate('Course', { post })}
+              />
+            )}
           </View>
           <MyText mystyle={styles.devider}>کورس های پر بازدید</MyText>
           <Slider
-            entries={ENTRIES1}
-            handleClick={() => navigation.navigate('Course')}
+            entries={Courses}
+            handleClick={(post) => navigation.navigate('Course', { post })}
           />
         </View>
         <View

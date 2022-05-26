@@ -33,7 +33,9 @@ const Blogpost = (props) => {
             <Card.Divider />
             <Card.Image
               style={{ marginBottom: 10, borderRadius: 10 }}
-              source={post.image}
+              source={{
+                uri: 'http://mzarmo.ir' + post.image,
+              }}
             />
             <MyText
               mystyle={{

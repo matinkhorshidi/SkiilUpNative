@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+
 import {
   TouchableOpacity,
   StyleSheet,
@@ -17,6 +17,36 @@ import Cours from '../json/course_landing.json';
 
 const HomeScreen = ({ navigation }) => {
   const [Logedin, setLogedin] = useState(false);
+  const [Courses, setCourses] = useState('');
+  const [Articles, setArticles] = useState('');
+  const [Loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}api/course/list`)
+      .then((response) => {
+        setCourses(response.data);
+
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('خطا در ارتباط با سرور');
+      });
+  }, []);
+  useEffect(() => {
+    let url = `${baseUrl}api/article/list/`;
+    axios
+      .get(url)
+      .then((response) => {
+        setArticles(response.data);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('خطا در ارتباط با سرور');
+      });
+  }, []);
 
   return (
     <SafeAreaView
@@ -98,11 +128,16 @@ const HomeScreen = ({ navigation }) => {
               )}
             </View>
           </ImageBackground>
-          <MyText mystyle={styles.devider}>کورس های اخیر</MyText>
-          <Slider
-            entries={ENTRIES1}
-            handleClick={(post) => navigation.navigate('Course', { post })}
-          />
+          <MyText mystyle={styles.devider}>دوره های اخیر</MyText>
+          {Loading ? (
+            <Loader />
+          ) : (
+            <Slider
+              entries={Courses}
+              handleClick={(post) => navigation.navigate('Course', { post })}
+            />
+          )}
+
           <MyText mystyle={styles.devider}>اساتید اسکیل آپ</MyText>
           <Masters />
           <ImageBackground
@@ -130,7 +165,7 @@ const HomeScreen = ({ navigation }) => {
           <MyText mystyle={styles.devider}>بلاگ های اخیر</MyText>
 
           <Slider
-            entries={ENTRIES2}
+            entries={Articles}
             handleClick={(post) => navigation.navigate('Blog', { post })}
           />
         </View>
@@ -199,8 +234,6 @@ const styles = StyleSheet.create({
 
 export default HomeScreen;
 
-///////////////////////////////
-// /////////////////////////
 // const ENTRIES1 = Cours;
 const ENTRIES1 = [
   {
