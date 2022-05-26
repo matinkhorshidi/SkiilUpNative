@@ -13,6 +13,7 @@ import Slider from '../components/Slider';
 import Masters from './../components/Masters';
 import IconAvatars from './../components/IconAvatars';
 import MyText from './../components/MyText';
+import Cours from '../json/course_landing.json';
 
 const HomeScreen = ({ navigation }) => {
   const [Logedin, setLogedin] = useState(false);
@@ -200,6 +201,7 @@ export default HomeScreen;
 
 ///////////////////////////////
 // /////////////////////////
+// const ENTRIES1 = Cours;
 const ENTRIES1 = [
   {
     id: 2,
